@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 from config import Config
 from dataset import EndoscopyMILDataset
-from models import build_model as build_acmil_model, acmil_loss
+from models import build_model as build_acmil_model, cbs_loss
 from weights import ensure_pretrained_weight, load_pretrained_weight
 from utils import (
     set_seed,
@@ -267,7 +267,7 @@ def train_one_epoch(
                 return_aux=True,
             )
 
-            loss, loss_dict = acmil_loss(
+            loss, loss_dict = cbs_loss(
                 logits=logits,
                 aux=aux,
                 labels=labels,
@@ -454,7 +454,7 @@ def validate_one_epoch(
                 return_aux=True,
             )
 
-            loss, loss_dict = acmil_loss(
+            loss, loss_dict = cbs_loss(
                 logits=logits,
                 aux=aux,
                 labels=labels,
